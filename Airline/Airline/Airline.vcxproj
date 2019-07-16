@@ -158,6 +158,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Airline.cpp" />
+    <ClCompile Include="DBConnectSupport.cpp" />
+    <ClCompile Include="DBConnectUtil.cpp" />
+    <ClCompile Include="FlightDetail.cpp" />
+    <ClCompile Include="UserReservation.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DBConnectSupport.h" />
+    <ClInclude Include="DBConnectUtil.h" />
+    <ClInclude Include="FlightDetail.h" />
+    <ClInclude Include="Properties.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="UserReservation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Airline.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
