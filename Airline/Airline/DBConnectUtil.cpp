@@ -1,7 +1,5 @@
 #include "DBConnectUtil.h"
 
-int qstateUtil;
-MYSQL_RES* resUtil;
 
 DBConnectUtil::DBConnectUtil()
 {
@@ -28,41 +26,22 @@ void DBConnectUtil::init()
 	}
 }
 
-void DBConnectUtil::addNew(string sql)
+void DBConnectUtil::execute(string sql)
 {
 	string insert_query = sql;
 
 	const char* q = insert_query.c_str(); // c_str converts string to constant char and this is required
 
-	qstateUtil = mysql_query(getConnnect(), q);
+	qstate = mysql_query(getConnnect(), q);
 
-	if (!qstateUtil)
+	if (!qstate)
 	{
-		cout << endl << "Successfully added in database." << endl;
+		cout << endl << "Successfully execute in database." << endl;
 		closeConnect();
 	}
 	else
 	{
-		cout << "Insert error";
-	}
-}
-
-void DBConnectUtil::update(string sql)
-{
-	string insert_query = sql;
-
-	const char* q = insert_query.c_str(); // c_str converts string to constant char and this is required
-
-	qstateUtil = mysql_query(getConnnect(), q);
-
-	if (!qstateUtil)
-	{
-		cout << "Successfully updated in database." << endl;
-		closeConnect();
-	}
-	else
-	{
-		cout << "Update error";
+		cout << "Execute error";
 	}
 }
 
@@ -70,14 +49,14 @@ MYSQL_RES* DBConnectUtil::select(string sql, string title)
 {
 	string query = sql;
 	const char* q = query.c_str();
-	qstateUtil = mysql_query(getConnnect(), q);
+	qstate = mysql_query(getConnnect(), q);
 
 	cout << endl;
 	cout << title << endl;
-	if (!qstateUtil)
+	if (!qstate)
 	{
-		resUtil = mysql_store_result(getConnnect());
-		return resUtil;
+		res = mysql_store_result(getConnnect());
+		return res;
 	}
 	else
 	{

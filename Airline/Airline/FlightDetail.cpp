@@ -1,17 +1,14 @@
 #include "FlightDetail.h"
 
-int qstate;
-MYSQL_RES* resFd;
-MYSQL_ROW rowFd;
 
 void FlightDetail::FlightSchedule()
 {
 	string query = "SELECT * FROM flightdetails_tb";
-	resFd = dBConnect.select(query, "--- Flight Schedule ---");
+	res = select(query, "--- Flight Schedule ---");
 	printf("-------------------------------------------------------------------------------------------\n");
 	printf("| %-15s | %-15s | %-15s | %-15s | %-15s |\n", "Flight No.", "From", "Destination", "Leave", "Arrive");
-	while ((rowFd = mysql_fetch_row(resFd))) {
-		printf("| %-15s | %-15s | %-15s | %-15s | %-15s |\n", rowFd[1], rowFd[3], rowFd[4], rowFd[7], rowFd[8]);
+	while ((row = mysql_fetch_row(res))) {
+		printf("| %-15s | %-15s | %-15s | %-15s | %-15s |\n", row[1], row[3], row[4], row[7], row[8]);
 	}
 	printf("-------------------------------------------------------------------------------------------\n");
 }
@@ -41,7 +38,7 @@ void FlightDetail::AddFlight()
 	cin >> comfirm;
 	if (comfirm) {
 		string insert_query = "INSERT INTO flightdetails_tb (f_no, f_name,f_from, f_destination, f_time, f_amount, f_leave, f_arrive, f_available) VALUES ('" + flightNo + "','" + flightName + "','" + flightFrom + "','" + flightDestination + "','" + flightTime + "','" + flightAmount + "','" + flightLeave + "','" + flightArrive + "','" + flightAvailable + "')";
-		dBConnect.addNew(insert_query);
+		execute(insert_query);
 	}
 	else {
 		cout << "Error handle";
@@ -63,24 +60,24 @@ int FlightDetail::updateFlight(string flightId)
 	string flightAvailableTmp;
 	string findbyid_query = "SELECT * FROM flightdetails_tb WHERE f_id = '" + flightId + "'";
 	const char* q = findbyid_query.c_str();
-	qstate = mysql_query(dBConnect.getConnnect(), q);
+	qstate = mysql_query(getConnnect(), q);
 	if (!qstate) {
-		resFd = mysql_store_result(dBConnect.getConnnect());
-		result = resFd->row_count;
+		res = mysql_store_result(getConnnect());
+		result = res->row_count;
 		if (result > 0) {
-			while ((rowFd = mysql_fetch_row(resFd)))
+			while ((row = mysql_fetch_row(res)))
 			{
-				cout << "Flight No.: " << rowFd[1] << "\nFlight Name: " << rowFd[2] << "\nFlight From: " << rowFd[3] << "\nFlight Destination: " << rowFd[4] << "\nFlight Time: " << rowFd[5] << "\nFlight Amount: " << rowFd[6] << endl << endl;
-				flightIdTmp = rowFd[0];
-				flightNoTmp = rowFd[1];
-				flightNameTmp = rowFd[2];
-				flightFromTmp = rowFd[3];
-				flightDestinationTmp = rowFd[4];
-				flightTimeTmp = rowFd[5];
-				flightAmountTmp = rowFd[6];
-				flightLeaveTmp = rowFd[7];
-				flightArriveTmp = rowFd[8];
-				flightAvailableTmp = rowFd[9];
+				cout << "Flight No.: " << row[1] << "\nFlight Name: " << row[2] << "\nFlight From: " << row[3] << "\nFlight Destination: " << row[4] << "\nFlight Time: " << row[5] << "\nFlight Amount: " << row[6] << endl << endl;
+				flightIdTmp = row[0];
+				flightNoTmp = row[1];
+				flightNameTmp = row[2];
+				flightFromTmp = row[3];
+				flightDestinationTmp = row[4];
+				flightTimeTmp = row[5];
+				flightAmountTmp = row[6];
+				flightLeaveTmp = row[7];
+				flightArriveTmp = row[8];
+				flightAvailableTmp = row[9];
 			}
 			cout << "----Input information for update Flight---" << endl;
 			cout << "No (input x if field don't need update): ";
@@ -132,7 +129,7 @@ int FlightDetail::updateFlight(string flightId)
 			cin >> comfirm;
 			if (comfirm) {
 				string update_query = "UPDATE flightdetails_tb SET f_no = '" + this->flightNo + "', f_name = '" + this->flightName + "',f_from = '" + this->flightFrom + "', f_destination = '" + this->flightDestination + "',f_time = '" + this->flightTime + "',f_amount = '" + this->flightAmount + "',f_leave = '" + this->flightLeave + "',f_arrive = '" + this->flightArrive + "', f_available = '" + this->flightAvailable + "' WHERE f_id = '" + flightIdTmp + "' ";
-				dBConnect.update(update_query);
+				execute(update_query);
 			}
 			else {
 				return 9999;
@@ -144,7 +141,7 @@ int FlightDetail::updateFlight(string flightId)
 		}
 	}
 	else {
-		cout << "Query Execution Problem!" << mysql_errno(dBConnect.getConnnect()) << endl;
+		cout << "Query Execution Problem!" << mysql_errno(getConnnect()) << endl;
 	}
 	return result;
 }
@@ -153,22 +150,22 @@ int FlightDetail::deleteFlight(string flightId)
 {
 	int result = -1;
 	string findbyid_query = "SELECT * FROM flightdetails_tb WHERE f_id = '" + flightId + "'";
-	resFd = dBConnect.select(findbyid_query);
-	result = resFd->row_count;
+	res = select(findbyid_query);
+	result = res->row_count;
 	if (result > 0) {
-		while ((rowFd = mysql_fetch_row(resFd)))
+		while ((row = mysql_fetch_row(res)))
 		{
-			this->flightNo = rowFd[1];
-			this->flightName = rowFd[2];
-			this->flightName = rowFd[2];
-			this->flightFrom = rowFd[3];
-			this->flightDestination = rowFd[4];
+			this->flightNo = row[1];
+			this->flightName = row[2];
+			this->flightName = row[2];
+			this->flightFrom = row[3];
+			this->flightDestination = row[4];
 		}
 		cout << "Are you sure you want to Delete flight " << flightNo << " of " << flightName << " from " << flightFrom << " to " << flightDestination << " ? ";
 		cin >> comfirm;
 		if (comfirm) {
 			string delete_query = "DELETE FROM flightdetails_tb WHERE f_id = '" + flightId + "' ";
-			dBConnect.update(delete_query);
+			execute(delete_query);
 		}
 		else {
 			return 9999;
@@ -187,26 +184,26 @@ int FlightDetail::flightLeaveArrive()
 	string flightArriveTmp;
 	string flightAvailableTmp;
 	string query = "SELECT * FROM flightdetails_tb";
-	resFd = dBConnect.select(query);
-	if (resFd->row_count > 0) {
+	res = select(query);
+	if (res->row_count > 0) {
 		printf("--------------------------------------------------------------------------------------------------------\n");
 		printf("| %-15s| %-15s | %-15s | %-15s | %-15s | %-15s |\n", "Flight ID", "Flight No.", "From", "Destination", "Leave", "Arrive");
-		while ((rowFd = mysql_fetch_row(resFd)))
+		while ((row = mysql_fetch_row(res)))
 		{
-			printf("| %-15s| %-15s | %-15s | %-15s | %-15s | %-15s |\n", rowFd[0], rowFd[1], rowFd[3], rowFd[4], rowFd[7], rowFd[8]);
+			printf("| %-15s| %-15s | %-15s | %-15s | %-15s | %-15s |\n", row[0], row[1], row[3], row[4], row[7], row[8]);
 		}
 		printf("-----------------------------------------------------------------------------------------------------------\n");
 	comeback:cout << "Choose ID item want select: ";
 		cin >> flightId;
 		string findbyid_query = "SELECT * FROM flightdetails_tb WHERE f_id = '" + flightId + "'";
-		resFd = dBConnect.select(findbyid_query);
-		if (resFd->row_count > 0) {
-			while ((rowFd = mysql_fetch_row(resFd)))
+		res = select(findbyid_query);
+		if (res->row_count > 0) {
+			while ((row = mysql_fetch_row(res)))
 			{
-				cout << "Flight No.: " << rowFd[1] << "\nFlight Name: " << rowFd[2] << "\nFlight From: " << rowFd[3] << "\nFlight Destination: " << rowFd[4] << "\nFlight Time: " << rowFd[5] << "\nFlight Amount: " << rowFd[6] << endl << endl;
-				flightLeaveTmp = rowFd[7];
-				flightArriveTmp = rowFd[8];
-				flightAvailableTmp = rowFd[9];
+				cout << "Flight No.: " << row[1] << "\nFlight Name: " << row[2] << "\nFlight From: " << row[3] << "\nFlight Destination: " << row[4] << "\nFlight Time: " << row[5] << "\nFlight Amount: " << row[6] << endl << endl;
+				flightLeaveTmp = row[7];
+				flightArriveTmp = row[8];
+				flightAvailableTmp = row[9];
 			}
 			cin.ignore(INT64_MAX, '\n');
 			cout << "Change Flight Leave (input x to not change): ";
@@ -228,7 +225,7 @@ int FlightDetail::flightLeaveArrive()
 			cin >> comfirm;
 			if (comfirm) {
 				string update_query = "UPDATE flightdetails_tb SET f_leave = '" + this->flightLeave + "',f_arrive = '" + this->flightArrive + "', f_available = '" + this->flightAvailable + "' WHERE f_id = '" + flightId + "' ";
-				dBConnect.update(update_query);
+				execute(update_query);
 				return 1;
 			}
 			else {

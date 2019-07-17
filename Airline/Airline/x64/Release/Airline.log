@@ -1,11 +1,8 @@
-﻿  Airline.cpp
-  FlightDetail.cpp
-C:\Training\C++\practice_cplusplus_airlines-reservation-system_201907\Airline\Airline\Airline.cpp(109,6): warning C4101:  'tmp': unreferenced local variable
-C:\Training\C++\practice_cplusplus_airlines-reservation-system_201907\Airline\Airline\FlightDetail.cpp(69,17): warning C4244:  '=': conversion from 'my_ulonglong' to 'int', possible loss of data
-C:\Training\C++\practice_cplusplus_airlines-reservation-system_201907\Airline\Airline\FlightDetail.cpp(157,16): warning C4244:  '=': conversion from 'my_ulonglong' to 'int', possible loss of data
+﻿  ActionDB.cpp
+  DBConnectSupport.cpp
   Generating code
-  0 of 183 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  17 of 182 functions ( 9.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    47 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Airline.vcxproj -> C:\Training\C++\practice_cplusplus_airlines-reservation-system_201907\Airline\x64\Release\Airline.exe

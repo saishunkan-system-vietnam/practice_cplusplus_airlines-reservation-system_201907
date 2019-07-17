@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionDB.cpp" />
     <ClCompile Include="Airline.cpp" />
     <ClCompile Include="DBConnectSupport.cpp" />
     <ClCompile Include="DBConnectUtil.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="UserReservation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionDB.h" />
     <ClInclude Include="DBConnectSupport.h" />
     <ClInclude Include="DBConnectUtil.h" />
     <ClInclude Include="FlightDetail.h" />

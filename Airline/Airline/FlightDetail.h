@@ -1,10 +1,9 @@
 #pragma once
 #include "DBConnectUtil.h"
 
-class FlightDetail
+class FlightDetail: public DBConnectUtil
 {
 private:
-	DBConnectUtil dBConnect;
 	string flightNo;
 	string flightName;
 	string flightFrom;

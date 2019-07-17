@@ -15,6 +15,11 @@ private:
 	ConnectProperties property;
 
 public:
+	int qstate;
+
+	MYSQL_RES* res;
+
+	MYSQL_ROW row;
 
 	DBConnectUtil();
 
@@ -24,9 +29,7 @@ public:
 
 	void init();
 
-	void addNew(string sql);
-
-	void update(string sql);
+	void execute(string sql);
 
 	MYSQL_RES* select(string sql, string title = "");
 };

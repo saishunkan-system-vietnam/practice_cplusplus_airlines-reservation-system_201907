@@ -1,7 +1,5 @@
 #include "UserReservation.h"
 
-MYSQL_RES* res;
-MYSQL_ROW row;
 
 void UserReservation::ReserveSeat()
 {
@@ -22,7 +20,7 @@ void UserReservation::ReserveSeat()
 	cin >> comfirm;
 	if (comfirm) {
 		string insert_query = "INSERT INTO userreservation_tb (u_name, u_phone, u_passportno, u_ticket, u_flightno, u_address) VALUES ('" + name + "','" + phone + "','" + passport + "','" + ticket + "','" + flightNo + "','" + address + "')";
-		dBConnect.addNew(insert_query);
+		execute(insert_query);
 	}
 	else {
 		cout << "Error handle";
@@ -35,7 +33,7 @@ void UserReservation::UserTicket()
 	cout << "Search with Name: ";
 	getline(cin, this->name);
 	string findbyname_query = "SELECT * FROM userreservation_tb WHERE u_name like '%" + name + "%'";
-	res = dBConnect.select(findbyname_query, "Result of search for keyword '" + name + "'");
+	res = select(findbyname_query, "Result of search for keyword '" + name + "'");
 	while ((row = mysql_fetch_row(res)))
 	{
 		cout << "Ticket No.: " << row[4] << "\nUser Name: " << row[1] << "\nUser Phone No.: " << row[2] << "\nUser Passport: " << row[3] << "\nFlight No.: " << row[5] << "\nUser Address: " << row[6] << endl << endl;
@@ -45,7 +43,7 @@ void UserReservation::UserTicket()
 void UserReservation::DisplayPassenger()
 {
 	string query = "SELECT * FROM userreservation_tb";
-	res = dBConnect.select(query, "--- Display Passenger ---");
+	res = select(query, "--- Display Passenger ---");
 	printf("-------------------------------------------------------------------------------------------------------------\n");
 	printf("| %-15s | %-15s | %-15s | %-15s | %-15s | %-15s |\n", "User Name.", "User Phone", "User Passport", "Ticket", "Flight No", "User Address");
 	while ((row = mysql_fetch_row(res))) {

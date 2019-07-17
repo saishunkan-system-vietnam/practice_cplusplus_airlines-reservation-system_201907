@@ -1,5 +1,7 @@
 #pragma once
-class DBConnectSupport
+#include "DBConnectUtil.h"
+
+class DBConnectSupport: public DBConnectUtil
 {
 private:
 	static DBConnectSupport* instance;
