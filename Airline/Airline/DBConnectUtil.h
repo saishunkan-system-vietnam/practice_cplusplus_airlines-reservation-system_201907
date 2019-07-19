@@ -6,6 +6,7 @@
 
 using namespace std;
 
+template<typename T>
 class DBConnectUtil
 {
 private:
@@ -29,8 +30,8 @@ public:
 
 	void init();
 
-	void execute(string sql);
+	void execute(T sql);
 
-	MYSQL_RES* select(string sql, string title = "");
+	MYSQL_RES* select(T sql, T title = "");
 };
 

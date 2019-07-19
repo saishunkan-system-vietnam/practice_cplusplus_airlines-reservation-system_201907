@@ -1,7 +1,8 @@
 #pragma once
 #include "DBConnectUtil.h"
+#include "DBConnectUtil.cpp"
 
-class FlightDetail: public DBConnectUtil
+class FlightDetail: public DBConnectUtil<string>
 {
 private:
 	string flightNo;

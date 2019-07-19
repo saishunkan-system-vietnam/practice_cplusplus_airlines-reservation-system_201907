@@ -1,13 +1,14 @@
 #pragma once
 #include "DBConnectSupport.h"
 
+template<class T>
 class ActionDB
 {
 private:
-	DBConnectSupport* dbptr = DBConnectSupport::GetInstance();
+	DBConnectSupport<T>* dbptr = DBConnectSupport<T>::GetInstance();
 public:
 	
-	void execute(string sql);
+	//void execute(string sql);
 
 };
 

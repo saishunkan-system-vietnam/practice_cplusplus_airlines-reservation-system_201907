@@ -1,7 +1,7 @@
 #pragma once
 #include "DBConnectUtil.h"
 
-class UserReservation: public DBConnectUtil
+class UserReservation: public DBConnectUtil<string>
 {
 private:
 	string name;

@@ -1,5 +1,5 @@
 #include "ActionDB.h"
 
-void ActionDB::execute(string sql)
-{
-}
+//void ActionDB::execute(string sql)
+//{
+//}

@@ -1,8 +1,9 @@
 #include "DBConnectSupport.h"
+template<typename T>
+DBConnectSupport<T>* DBConnectSupport<T>::instance = nullptr;
 
-DBConnectSupport* DBConnectSupport::instance = nullptr;
-
-DBConnectSupport* DBConnectSupport::GetInstance()
+template<typename T>
+DBConnectSupport<T>* DBConnectSupport<T>::GetInstance()
 {
 	if (!instance) {
 		instance = new DBConnectSupport;

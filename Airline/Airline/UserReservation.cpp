@@ -1,6 +1,5 @@
 #include "UserReservation.h"
 
-
 void UserReservation::ReserveSeat()
 {
 	cout << "----Input information passenger and Flights---" << endl;
@@ -27,18 +26,20 @@ void UserReservation::ReserveSeat()
 	}
 }
 
+
 void UserReservation::UserTicket()
 {
 	cout << "----Search ticket by name---" << endl;
 	cout << "Search with Name: ";
 	getline(cin, this->name);
 	string findbyname_query = "SELECT * FROM userreservation_tb WHERE u_name like '%" + name + "%'";
-	res = select(findbyname_query, "Result of search for keyword '" + name + "'");
+	res = select(findbyname_query);//"Result of search for keyword '" + name + "'"
 	while ((row = mysql_fetch_row(res)))
 	{
 		cout << "Ticket No.: " << row[4] << "\nUser Name: " << row[1] << "\nUser Phone No.: " << row[2] << "\nUser Passport: " << row[3] << "\nFlight No.: " << row[5] << "\nUser Address: " << row[6] << endl << endl;
 	}
 }
+
 
 void UserReservation::DisplayPassenger()
 {

@@ -1,22 +1,25 @@
 #include "DBConnectUtil.h"
 
-
-DBConnectUtil::DBConnectUtil()
+template<class T>
+DBConnectUtil<T>::DBConnectUtil()
 {
 	init();
 }
 
-MYSQL* DBConnectUtil::getConnnect()
+template<class T>
+MYSQL* DBConnectUtil<T>::getConnnect()
 {
 	return this->conn;
 }
 
-void DBConnectUtil::closeConnect()
+template<class T>
+void DBConnectUtil<T>::closeConnect()
 {
 	mysql_close(this->conn);
 }
 
-void DBConnectUtil::init()
+template<class T>
+void DBConnectUtil<T>::init()
 {
 	this->conn = mysql_init(0);
 	this->conn = mysql_real_connect(conn, property.HOST, property.USER_NAME, property.PASSWORD, property.DB_NAME, property.PORT, NULL, 0);
@@ -26,9 +29,10 @@ void DBConnectUtil::init()
 	}
 }
 
-void DBConnectUtil::execute(string sql)
+template<class T>
+void DBConnectUtil<T>::execute(T sql)
 {
-	string insert_query = sql;
+	T insert_query = sql;
 
 	const char* q = insert_query.c_str(); // c_str converts string to constant char and this is required
 
@@ -45,7 +49,8 @@ void DBConnectUtil::execute(string sql)
 	}
 }
 
-MYSQL_RES* DBConnectUtil::select(string sql, string title)
+template<class T>
+MYSQL_RES* DBConnectUtil<T>::select(T sql, T title)
 {
 	string query = sql;
 	const char* q = query.c_str();
