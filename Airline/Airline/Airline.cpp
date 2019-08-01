@@ -122,6 +122,7 @@ void SelectFunction(int n, BaseService<string>* baseService) {
 		BackToMenu(tmp);
 		break;
 	case 3:
+		baseService = new FlightDetailService();
 		baseService->FlightSchedule();
 		BackToMenu(tmp);
 		break;
@@ -130,7 +131,7 @@ void SelectFunction(int n, BaseService<string>* baseService) {
 		BackToMenu(tmp);
 		break;
 	case 5:
-	baseService = new FlightDetailService();
+		baseService = new FlightDetailService();
 	action:system("cls");
 		subMenu();
 	input:cout << "Select function in menu: ";
@@ -176,5 +177,6 @@ int main()
 			SelectFunction(n, baseService);
 		}
 	} while (n);
+	delete baseService;
 }
 

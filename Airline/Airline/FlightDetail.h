@@ -1,6 +1,4 @@
 #pragma once
-//#include "DBConnectUtil.h"
-//#include "DBConnectUtil.cpp"
 
 #include <iostream>
 #include <string>
@@ -10,199 +8,80 @@ using namespace std;
 class FlightDetail
 {
 private:
+
 	string flightId;
+
 	string flightNo;
+
 	string flightName;
+
 	string flightFrom;
+
 	string flightDestination;
+
 	string flightTime;
+
 	string flightAmount;
+
 	string flightLeave;
+
 	string flightArrive;
+
 	string flightAvailable;
+
 	bool comfirm;
+
 public:
 
-	void setFlightId(string flightId) {
-		this->flightId = flightId;
-	}
+	void setFlightId(string flightId);
 
-	string getFlightId() {
-		return this->flightId;
-	}
+	string getFlightId();
 
-	void setFlightNo(string flightNo) {
-		this->flightNo = flightNo;
-	}
+	void setFlightNo(string flightNo);
 
-	string getFlightNo() {
-		return this->flightNo;
-	}
+	string getFlightNo();
 
-	void setFlightName(string flightName) {
-		this->flightName = flightName;
-	}
+	void setFlightName(string flightName);
 
-	string getFlightName() {
-		return this->flightName;
-	}
+	string getFlightName();
 
-	void setFlightFrom(string flightFrom) {
-		this->flightFrom = flightFrom;
-	}
+	void setFlightFrom(string flightFrom);
 
-	string getFlightFrom() {
-		return this->flightFrom;
-	}
+	string getFlightFrom();
 
-	void setFlightDestination(string flightDestination) {
-		this->flightDestination = flightDestination;
-	}
+	void setFlightDestination(string flightDestination);
 
-	string getFlightDestination() {
-		return this->flightDestination;
-	}
+	string getFlightDestination();
 
-	void setFlightTime(string flightTime) {
-		this->flightTime = flightTime;
-	}
+	void setFlightTime(string flightTime);
 
-	string getFlightTime() {
-		return this->flightTime;
-	}
+	string getFlightTime();
 
-	void setFlightAmount(string flightAmount) {
-		this->flightAmount = flightAmount;
-	}
+	void setFlightAmount(string flightAmount);
 
-	string getFlightAmount() {
-		return this->flightAmount;
-	}
+	string getFlightAmount();
 
-	void setFlightLeave(string flightLeave) {
-		this->flightLeave = flightLeave;
-	}
+	void setFlightLeave(string flightLeave);
 
-	string getFlightLeave() {
-		return this->flightLeave;
-	}
+	string getFlightLeave();
 
-	void setFlightArrive(string flightArrive) {
-		this->flightArrive = flightArrive;
-	}
+	void setFlightArrive(string flightArrive);
 
-	string getFlightArrive() {
-		return this->flightArrive;
-	}
+	string getFlightArrive();
 
-	void setFlightAvailable(string flightAvailable) {
-		this->flightAvailable = flightAvailable;
-	}
+	void setFlightAvailable(string flightAvailable);
 
-	string getFlightAvailable() {
-		return this->flightAvailable;
-	}
+	string getFlightAvailable();
 
-	void setComfirm(bool comfirm) {
-		this->comfirm = comfirm;
-	}
+	void setComfirm(bool comfirm);
 
-	bool getComfirm() {
-		return this->comfirm;
-	}
+	bool getComfirm();
 
-	void input() {
-		cout << "No: ";
-		getline(cin, this->flightNo);
-		cout << "Flight Name: ";
-		getline(cin, this->flightName);
-		cout << "Flight From: ";
-		getline(cin, this->flightFrom);
-		cout << "Flight Destination: ";
-		getline(cin, this->flightDestination);
-		cout << "Flight Time: ";
-		getline(cin, this->flightTime);
-		cout << "Flight Amount: ";
-		getline(cin, this->flightAmount);
-		cout << "Flight Leave: ";
-		getline(cin, this->flightLeave);
-		cout << "Flight Arrive: ";
-		getline(cin, this->flightArrive);
-		cout << "Flight Avaiable: ";
-		getline(cin, this->flightAvailable);
-	}
+	void input();
 
-	void inputClone(FlightDetail flightDetailTmp) {
+	void inputClone(FlightDetail flightDetailTmp);
 
-		if (flightDetailTmp.getFlightId() != "") {
-			this->flightId = flightDetailTmp.getFlightId();
-		}
-
-		cout << "No (input x if field don't need update): ";
-		getline(cin, this->flightNo);
-		if (flightNo == "x") {
-			this->flightNo = flightDetailTmp.getFlightNo();
-		}
-		cout << "Flight Name (input x if field don't need update): ";
-		getline(cin, this->flightName);
-		if (flightName == "x") {
-			this->flightName = flightDetailTmp.getFlightName();
-		}
-		cout << "Flight From (input x if field don't need update): ";
-		getline(cin, this->flightFrom);
-		if (flightFrom == "x") {
-			this->flightFrom = flightDetailTmp.getFlightFrom();
-		}
-		cout << "Flight Destination (input x if field don't need update): ";
-		getline(cin, this->flightDestination);
-		if (flightDestination == "x") {
-			this->flightDestination = flightDetailTmp.getFlightDestination();
-		}
-		cout << "Flight Time (input x if field don't need update): ";
-		getline(cin, this->flightTime);
-		if (flightTime == "x") {
-			this->flightTime = flightDetailTmp.getFlightTime();
-		}
-		cout << "Flight Amount (input x if field don't need update): ";
-		getline(cin, this->flightAmount);
-		if (flightAmount == "x") {
-			this->flightAmount = flightDetailTmp.getFlightAmount();
-		}
-		cout << "Flight Leave (input x if field don't need update): ";
-		getline(cin, this->flightLeave);
-		if (flightLeave == "x") {
-			this->flightLeave = flightDetailTmp.getFlightLeave();
-		}
-		cout << "Flight Arrive (input x if field don't need update): ";
-		getline(cin, this->flightArrive);
-		if (flightArrive == "x") {
-			this->flightArrive = flightDetailTmp.getFlightArrive();
-		}
-		cout << "Flight Avaiable (input x if field don't need update): ";
-		getline(cin, this->flightAvailable);
-		if (flightAvailable == "x") {
-			this->flightAvailable = flightDetailTmp.getFlightAvailable();
-		}
-	}
-
-	void inputUpdateFlightLeaveArrive(FlightDetail flightDetailTmp) {
-		cin.ignore(INT64_MAX, '\n');
-		cout << "Change Flight Leave (input x to not change): ";
-		getline(cin, this->flightLeave);
-		if (flightLeave == "x") {
-			this->flightLeave = flightDetailTmp.getFlightLeave();
-		}
-		cout << "Change Flight Arrive (input x to not change): ";
-		getline(cin, this->flightArrive);
-		if (flightArrive == "x") {
-			this->flightArrive = flightDetailTmp.getFlightArrive();
-		}
-		cout << "Change Flight Available (input x to not change): ";
-		getline(cin, this->flightAvailable);
-		if (flightAvailable == "x") {
-			this->flightAvailable = flightDetailTmp.getFlightAvailable();
-		}
-	}
+	void inputUpdateFlightLeaveArrive(FlightDetail flightDetailTmp);
 
 };
 

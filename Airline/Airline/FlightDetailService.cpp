@@ -98,7 +98,7 @@ int FlightDetailService::deleteFlight(string flightId)
 			flightDetail.setFlightFrom(row[3]);
 			flightDetail.setFlightDestination(row[4]);
 		}
-		cout << "Are you sure you want to Delete flight " << flightDetail.getFlightNo()<< " of " << flightDetail.getFlightName() << " from " << flightDetail.getFlightFrom() << " to " << flightDetail.getFlightDestination() << " ? ";
+		cout << "Are you sure you want to Delete flight " << flightDetail.getFlightNo() << " of " << flightDetail.getFlightName() << " from " << flightDetail.getFlightFrom() << " to " << flightDetail.getFlightDestination() << " ? ";
 		cin >> confirm;
 		if (confirm) {
 			string delete_query = "DELETE FROM flightdetails_tb WHERE f_id = '" + flightId + "' ";

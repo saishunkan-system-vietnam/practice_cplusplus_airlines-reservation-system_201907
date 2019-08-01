@@ -1,5 +1,4 @@
 #pragma once
-//#include "DBConnectUtil.h"
 
 #include <iostream>
 #include <string>
@@ -9,88 +8,53 @@ using namespace std;
 class UserReservation
 {
 private:
+
 	string name;
+
 	string phone;
+
 	string passport;
+
 	string ticket;
+
 	string flightNo;
+
 	string address;
+
 	bool comfirm;
+
 public:
 
-	void setName(string name) {
-		this->name = name;
-	}
+	void setName(string name);
 
-	string getName() {
-		return this->name;
-	}
+	string getName();
 
-	void setPhone(string phone) {
-		this->phone = phone;
-	}
+	void setPhone(string phone);
 
-	string getPhone() {
-		return this->phone;
-	}
+	string getPhone();
 
-	void setPassport(string passport) {
-		this->passport = passport;
-	}
+	void setPassport(string passport);
 
-	string getPassport() {
-		return this->passport;
-	}
+	string getPassport();
 
-	void setTicket(string ticket) {
-		this->ticket = ticket;
-	}
+	void setTicket(string ticket);
 
-	string getTicket() {
-		return this->ticket;
-	}
+	string getTicket();
 
-	void setFlightNo(string flightNo) {
-		this->flightNo = flightNo;
-	}
+	void setFlightNo(string flightNo);
 
-	string getFlightNo() {
-		return this->flightNo;
-	}
+	string getFlightNo();
 
-	void setAddress(string address) {
-		this->address = address;
-	}
+	void setAddress(string address);
 
-	string getAddress() {
-		return this->address;
-	}
+	string getAddress();
 
-	void setComfirm(bool comfirm) {
-		this->comfirm = comfirm;
-	}
+	void setComfirm(bool comfirm);
 
-	bool getComfirm() {
-		return this->comfirm;
-	}
+	bool getComfirm();
 
-	void input() {
-		cout << "Name: ";
-		getline(cin, this->name);
-		cout << "Phone: ";
-		getline(cin, this->phone);
-		cout << "Passport: ";
-		getline(cin, this->passport);
-		cout << "Ticket: ";
-		getline(cin, this->ticket);
-		cout << "Flight No: ";
-		getline(cin, this->flightNo);
-		cout << "Address: ";
-		getline(cin, this->address);
-	}
+	void input();
 
-	void inputName() {
-		getline(cin, this->name);
-	}
+	void inputName();
 };
 
