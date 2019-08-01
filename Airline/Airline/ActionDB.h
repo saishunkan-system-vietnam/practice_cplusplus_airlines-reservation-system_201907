@@ -1,14 +1,20 @@
 #pragma once
 #include "DBConnectSupport.h"
 
-template<class T>
 class ActionDB
 {
-private:
-	DBConnectSupport<T>* dbptr = DBConnectSupport<T>::GetInstance();
+
 public:
+
+	int qstate;
+
+	MYSQL_RES* res;
 	
-	//void execute(string sql);
+	MYSQL* getConnect();
+
+	void execute(string sql);
+
+	MYSQL_RES* select(string sql);
 
 };
 

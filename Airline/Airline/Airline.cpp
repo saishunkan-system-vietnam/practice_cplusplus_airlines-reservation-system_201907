@@ -3,21 +3,11 @@
 
 #include <stdlib.h>
 #include <windows.h>
-#include "Properties.h"
-#include "UserReservation.h"
-#include "FlightDetail.h"
+#include "BaseService.h"
+#include "UserReservationService.h"
+#include "FlightDetailService.h"
 
-using namespace std;
 
-void ReserveSeat();
-void UserTicket();
-void FlightSchedule();
-void DisplayPassenger();
-void SelectFunctionSubMenu(int);
-void AddFlight();
-int UpdateFlight(string);
-int DeleteFlight(string);
-int FlightLeaveArrive();
 
 void Menu() {
 	cout << "------------------MENU-----------------" << endl;
@@ -54,71 +44,20 @@ label:cout << "Input 99 for Back to menu: ";
 
 }
 
-void SelectFunction(int n) {
-	int tmp;
-	int sub;
-	switch (n)
-	{
-	case 1:
-		ReserveSeat();
-		Sleep(1000);
-		system("cls");
-		Menu();
-		break;
-	case 2:
-		UserTicket();
-		BackToMenu(tmp);
-		break;
-	case 3:
-		FlightSchedule();
-		BackToMenu(tmp);
-		break;
-	case 4:
-		DisplayPassenger();
-		BackToMenu(tmp);
-		break;
-	case 5:
-	action:system("cls");
-		subMenu();
-	input:cout << "Select function in menu: ";
-		cin >> sub;
-		if (sub >= 1 || sub <= 5) {
-			if (sub == 5) {
-				system("cls");
-				Menu();
-			}
-			else {
-				cin.ignore(INT64_MAX, '\n');
-				SelectFunctionSubMenu(sub);
-				goto action;
-			}
-		}
-		else {
-			goto input;
-		}
-		break;
-	case 6:
-		cout << "case 6";
-		break;
-	default:
-		break;
-	}
-}
-
-void SelectFunctionSubMenu(int n) {
+void SelectFunctionSubMenu(int n, BaseService<string>* baseService) {
 	int tmp, result;
 	string flightId;
 	switch (n)
 	{
 	case 1:
-		AddFlight();
+		baseService->AddFlight();
 		Sleep(3000);
 		break;
 	case 2:
 	input:cout << "Input Id item need update: ";
 		cin >> flightId;
 		cin.ignore(INT64_MAX, '\n');
-		result = UpdateFlight(flightId);
+		result = baseService->updateFlight(flightId);
 		if (result == 9999) {
 			break;
 		}
@@ -134,7 +73,7 @@ void SelectFunctionSubMenu(int n) {
 	flightId:cout << "Input Id item need delete: ";
 		cin >> flightId;
 		cin.ignore(INT64_MAX, '\n');
-		result = DeleteFlight(flightId);
+		result = baseService->deleteFlight(flightId);
 		if (result == 9999) {
 			break;
 		}
@@ -147,7 +86,7 @@ void SelectFunctionSubMenu(int n) {
 		}
 		break;
 	case 4:
-		result = FlightLeaveArrive();
+		result = baseService->flightLeaveArrive();
 		if (result == 9999) {
 			break;
 		}
@@ -166,8 +105,62 @@ void SelectFunctionSubMenu(int n) {
 	}
 }
 
+void SelectFunction(int n, BaseService<string>* baseService) {
+	int tmp;
+	int sub;
+	baseService = new UserReservationService();
+	switch (n)
+	{
+	case 1:
+		baseService->ReserveSeat();
+		Sleep(1000);
+		system("cls");
+		Menu();
+		break;
+	case 2:
+		baseService->UserTicket();
+		BackToMenu(tmp);
+		break;
+	case 3:
+		baseService->FlightSchedule();
+		BackToMenu(tmp);
+		break;
+	case 4:
+		baseService->DisplayPassenger();
+		BackToMenu(tmp);
+		break;
+	case 5:
+	baseService = new FlightDetailService();
+	action:system("cls");
+		subMenu();
+	input:cout << "Select function in menu: ";
+		cin >> sub;
+		if (sub >= 1 || sub <= 5) {
+			if (sub == 5) {
+				system("cls");
+				Menu();
+			}
+			else {
+				cin.ignore(INT64_MAX, '\n');
+				SelectFunctionSubMenu(sub, baseService);
+				goto action;
+			}
+		}
+		else {
+			goto input;
+		}
+		break;
+	case 6:
+		cout << "You exited system. See you again!!!" << endl;
+		exit(1);
+	default:
+		break;
+	}
+}
+
 int main()
 {
+	BaseService<string>* baseService = NULL;
 	int n;
 	Menu();
 	do {
@@ -180,50 +173,8 @@ int main()
 		}
 		else {
 			cin.ignore(INT64_MAX, '\n');
-			SelectFunction(n);
+			SelectFunction(n, baseService);
 		}
 	} while (n);
 }
 
-void ReserveSeat() {
-	UserReservation user;
-	user.ReserveSeat();
-}
-
-void UserTicket() {
-	UserReservation user;
-	user.UserTicket();
-}
-
-void FlightSchedule() {
-	FlightDetail flightDetail;
-	flightDetail.FlightSchedule();
-}
-
-void DisplayPassenger() {
-	UserReservation user;
-	user.DisplayPassenger();
-}
-
-void AddFlight() {
-	FlightDetail flightDetail;
-	flightDetail.AddFlight();
-}
-
-int UpdateFlight(string flightId) {
-	FlightDetail flightDetail;
-	int result = flightDetail.updateFlight(flightId);
-	return result;
-}
-
-int DeleteFlight(string flightId) {
-	FlightDetail flightDetail;
-	int result = flightDetail.deleteFlight(flightId);
-	return result;
-}
-
-int FlightLeaveArrive() {
-	FlightDetail flightDetail;
-	int result = flightDetail.flightLeaveArrive();
-	return result;
-}

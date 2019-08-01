@@ -162,16 +162,21 @@
     <ClCompile Include="DBConnectSupport.cpp" />
     <ClCompile Include="DBConnectUtil.cpp" />
     <ClCompile Include="FlightDetail.cpp" />
+    <ClCompile Include="FlightDetailService.cpp" />
     <ClCompile Include="UserReservation.cpp" />
+    <ClCompile Include="UserReservationService.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionDB.h" />
+    <ClInclude Include="BaseService.h" />
     <ClInclude Include="DBConnectSupport.h" />
     <ClInclude Include="DBConnectUtil.h" />
     <ClInclude Include="FlightDetail.h" />
+    <ClInclude Include="FlightDetailService.h" />
     <ClInclude Include="Properties.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="UserReservation.h" />
+    <ClInclude Include="UserReservationService.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Airline.rc" />

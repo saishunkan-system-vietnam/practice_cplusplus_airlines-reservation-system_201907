@@ -6,32 +6,23 @@
 
 using namespace std;
 
-template<typename T>
 class DBConnectUtil
 {
 private:
 
-	MYSQL* conn;
+	MYSQL* conn = nullptr;
 
-	ConnectProperties property;
-
-public:
-	int qstate;
-
-	MYSQL_RES* res;
-
-	MYSQL_ROW row;
+protected:
 
 	DBConnectUtil();
+
+	void init();
+
+public:
 
 	MYSQL* getConnnect();
 
 	void closeConnect();
 
-	void init();
-
-	void execute(T sql);
-
-	MYSQL_RES* select(T sql, T title = "");
 };
 
